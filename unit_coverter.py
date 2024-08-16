@@ -8,22 +8,6 @@ print("E for Exiting the programme anytime")
 print()
 
 
-def get_valid_input_for_main():
-    while True:
-        valid_input = str(input("Enter option: ")).upper()
-
-        if valid_input in ['L', 'W', 'T', 'E']:
-            if valid_input == 'E':
-                print("Exiting the programme")
-                break
-            else:
-                return valid_input
-        else:
-            print("Enter valid Character!")
-
-
-main_choice = get_valid_input_for_main()
-
 # value = float(input("Enter current value: "))
 
 
@@ -137,37 +121,45 @@ def Temperature(t):
 def get_valid_input_for_unit(unit_type, valid_units, prompt_message):
     while True:
         print(prompt_message)
-        unit_type = str(input("Type current unit: "))
+        unit_type = str(input("Type current unit: ")).lower()
+        print("************************************")
 
         if unit_type in valid_units:
-            if unit_type == 'E':
+            if unit_type == 'e':
                 print("exiting the programme")
-                break
+                exit()
             else:
                 return unit_type
         else:
             print("Enter valid unit!")
 
 
-def get_valid_input_value():
-
+def get_valid_input():
     while True:
-        valid_value = float(input("Enter current value:"))
+        valid_input = str(input("Enter option: ")).upper()
 
-        if valid_value > 0:
-            if valid_value == 'E':
-                print("exiting the programme")
-                break
+        if valid_input in ['L', 'W', 'T', 'E']:
+            if valid_input == 'E':
+                print("Exiting the program")
+                exit()
             else:
-                return valid_value
+                valid_value = float(input("Enter current value:"))
+                print("************************************")
+
+                if valid_value > 0:
+                    return valid_input, valid_value
+                else:
+                    print("Enter a positive value!")
         else:
-            print("Enter Positive value!")
+            print("Enter a valid character!")
+
+
+main_choice, unit_value = get_valid_input()
 
 
 if main_choice == 'L':
     prompt = "Type,\nm for meter\nk for kilometer\nmi for miles\nf for feet"
-    valid_units = ['k', 'mi', 'f', 'm', 'E']
-    unit_value = get_valid_input_value()
+    valid_units = ['k', 'mi', 'f', 'm', 'e']
     type_of_unit = get_valid_input_for_unit('length', valid_units, prompt)
 
     length(unit_value)
@@ -175,9 +167,7 @@ if main_choice == 'L':
 
 elif main_choice == 'W':
     prompt = "Type,\nk for Kilogram\ng for Gram\no for Ounce\np for Pound"
-    valid_units = ['k', 'g', 'o', 'p', 'E']
-
-    unit_value = get_valid_input_value()
+    valid_units = ['k', 'g', 'o', 'p', 'e']
     type_of_unit = get_valid_input_for_unit('weight', valid_units, prompt)
 
     weight(unit_value)
@@ -185,8 +175,7 @@ elif main_choice == 'W':
 
 elif main_choice == 'T':
     prompt = "Type,\nc for Celsius\nk for Kelvin\nf for Fahrenheit"
-    valid_units = ['c', 'k', 'f', 'E']
-    unit_value = get_valid_input_value()
+    valid_units = ['c', 'k', 'f', 'e']
     type_of_unit = get_valid_input_for_unit('temperature', valid_units, prompt)
 
     Temperature(unit_value)
